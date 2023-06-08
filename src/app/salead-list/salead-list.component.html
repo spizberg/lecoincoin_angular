@@ -1,0 +1,54 @@
+<!-- Page Content -->
+<div class="page-heading products-heading header-text">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="text-content">
+            <h4>SaleAds</h4>
+            <h2>list saleads</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="products">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="filters">
+            <ul>
+                <li [class.active]="!use_specific_saleads" (click)="getSaleads()">All SaleAds</li>
+                <li [class.active]="use_specific_saleads" (click)="getUserSaleads()">My SaleAds</li>
+                
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="filters-content">
+              <div class="row">
+                  <div class="col-lg-4 col-md-4 d-flex" *ngFor="let salead of displayed_saleads">
+                    <div class="product-item">
+                      <a [routerLink]="['/show', salead.id]"><img [src]="getDisplayToImage(salead.illustrations)" alt=""></a>
+                      <div class="down-content">
+                        <a href="#"><h4>{{ salead.title }}</h4></a>
+                        <h6>{{ salead.price }} €</h6>
+                        <p>{{ salead.description | slice:0:100  }}{{ salead.description.length > 100 ? '...' : ''}}</p>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-12 align-self-center">
+          <pagination [boundaryLinks]="show_boundary_links" 
+            [directionLinks]="show_direction_links" 
+            [totalItems]="getSaleAdsTotal()"
+            [itemsPerPage]="saleads_per_page"
+            (pageChanged)="pageChanged($event)">
+          </pagination>
+        </div>
+      </div>
+    </div>
+</div>

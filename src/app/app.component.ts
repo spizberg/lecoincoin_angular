@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,4 +9,17 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'lecoincoin';
+
+  constructor(private location: Location) {}
+
+  isLoginPage() {
+    let titlee = this.location.prepareExternalUrl(this.location.path());
+    titlee = titlee.split('/')[1];
+    if(titlee === 'login'){
+        return false;
+    }
+    else {
+        return true;
+    }
+  }
 }
